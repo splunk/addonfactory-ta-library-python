@@ -81,6 +81,9 @@ class Job(object):
     def __eq__(self, other):
         return isinstance(other, Job) and (self.ident() == other.ident())
 
+    def __hash__(self):
+        return self.ident()
+
     def __call__(self):
         self._func(self)
 

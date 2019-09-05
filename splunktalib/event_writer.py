@@ -61,10 +61,10 @@ class EventWriter(object):
                 event = event_queue.get(timeout=3)
                 if event is not None:
                     if isinstance(event, string_types):
-                        write(event)
+                        write(event.encode("utf-8"))
                     elif isinstance(event, Iterable):
                         for evt in event:
-                            write(evt)
+                            write(evt.encode("utf-8"))
                 else:
                     log.logger.info("Event writer got tear down signal")
                     got_shutdown_signal = True
@@ -105,10 +105,10 @@ class EventWriterWithCheckpoint(EventWriter):
                     events = event[0]
                     ckpt_tuple = event[1]
                     if isinstance(events, string_types):
-                        write(events)
+                        write(events.encode("utf-8"))
                     elif isinstance(events, Iterable):
                         for evt in events:
-                            write(evt)
+                            write(evt.encode("utf-8"))
 
                     # Update checkpoint after events are sent to stdout to avoid
                     # data loss.

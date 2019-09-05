@@ -1,5 +1,5 @@
 """
-Copyright (C) 2005-2015 Splunk Inc. All Rights Reserved.
+Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 
 log utility for TA
 """

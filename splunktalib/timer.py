@@ -54,6 +54,12 @@ class Timer(object):
     def __eq__(self, other):
         return isinstance(other, Timer) and (self.ident() == other.ident())
 
+    def __lt__(self, other):
+        return self.__cmp__(other) == -1
+
+    def __hash__(self):
+        return self.ident()
+
     def __call__(self):
         self._callback()
 

@@ -1,5 +1,5 @@
 """
-Copyright (C) 2005-2015 Splunk Inc. All Rights Reserved.
+Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 
 Commonly used design partten for python user, includes:
   - singleton (Decorator function used to build singleton)

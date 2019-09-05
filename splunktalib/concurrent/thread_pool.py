@@ -11,9 +11,7 @@ import threading
 import queue
 import multiprocessing
 import traceback
-import exceptions
 from time import time
-
 from splunktalib.common import log
 
 
@@ -340,7 +338,7 @@ class AsyncResult(object):
         """
 
         if not self.ready():
-            raise exceptions.AssertionError("Function is not ready")
+            raise AssertionError("Function is not ready")
         res = self._q.get()
         self._q.put(res)
 

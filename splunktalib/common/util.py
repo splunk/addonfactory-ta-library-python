@@ -1,5 +1,5 @@
 """
-Copyright (C) 2005-2015 Splunk Inc. All Rights Reserved.
+Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 """
 
 from future import standard_library
@@ -70,7 +70,7 @@ def get_appname_from_path(absolute_path):
 
 
 def escape_cdata(data):
-    data = data.encode("utf-8", errors="xmlcharrefreplace")
+    data = data.encode("utf-8", errors="xmlcharrefreplace").decode("utf-8")
     data = data.replace("]]>", "]]&gt;")
     if data.endswith("]"):
         data = data[:-1] + "%5D"
@@ -101,7 +101,7 @@ def escape_json_control_chars(json_str):
 
 def disable_stdout_buffer():
     os.environ["PYTHONUNBUFFERED"] = "1"
-    sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
+    sys.stdout = os.fdopen(sys.stdout.fileno(), 'wb', 0)
     gc.garbage.append(sys.stdout)
 
 
