@@ -95,7 +95,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - poetry-{{ checksum "poetry.lock" }}
+            - poetry-cache-{{ checksum "poetry.lock" }}
       - run:
           name: Install Tools
           command: |
@@ -108,7 +108,7 @@ jobs:
             poetry run poetry-dynamic-versioning
             poetry build
       - save_cache:
-          key: poetry-{{ checksum "poetry.lock" }}
+          key: poetry-cache-{{ checksum "poetry.lock" }}
           paths:
             - ~/.cache/pypoetry
       - store_artifacts:
