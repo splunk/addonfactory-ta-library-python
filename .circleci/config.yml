@@ -236,7 +236,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - poetry-{{ checksum "poetry.lock" }}
+            - poetry-cache-{{ checksum "poetry.lock" }}
       - run:
           name: Install Tools
           command: |
