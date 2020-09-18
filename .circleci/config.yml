@@ -281,7 +281,7 @@ workflows:
             branches:
               only: develop
           requires:
-            - test-unit
+            - build
       - splunk-release/tag:
           name: approval-tag-alpha
           tag_level: a
