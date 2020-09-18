@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "splunktalib"
-version = "0.0.0"
+version = "0.0.0.post6.dev0+1a305c3"
 description = "Supporting library for Splunk Add-ons"
 authors = ["rfaircloth-splunk <rfaircloth@splunk.com>"]
 license = "APACHE-2.0"
