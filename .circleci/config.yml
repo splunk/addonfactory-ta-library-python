@@ -275,6 +275,13 @@ workflows:
       #     filters:
       #       branches:
       #         only: /.*/
+      - approval-merge-beta-to-master:
+          requires:
+            - tag-beta
+          type: approval
+          filters:
+            branches:
+              only: develop
       - splunk-release/merge-to-master:
           name: merge-beta-to-master
           gh_user: ${GH_USER}
