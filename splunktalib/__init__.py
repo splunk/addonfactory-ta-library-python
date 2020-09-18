@@ -1,2 +1,1 @@
-__version__ = "1.0"
-__license__ = "Splunk"
+__version__ = "0.0.0"
