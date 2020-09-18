@@ -107,7 +107,7 @@ jobs:
             source $HOME/.poetry/env
             poetry install            
             poetry run poetry-dynamic-versioning
-            poetry publish --build -u ${TWINE_USERNAME} -p ${TWINE_PASSWORD}
+            poetry build
       - save_cache:
           key: poetry-{{ checksum "poetry.lock" }}
           paths:
