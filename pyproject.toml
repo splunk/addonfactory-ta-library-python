@@ -23,6 +23,7 @@ pytest = [
 pytest-cov = "^2"
 poetry-dynamic-versioning = { version = "^0.8", python = "^3.7" }
 pyyaml = "^5.3"
+tomlkit = "^0"
 
 [tool.poetry-dynamic-versioning]
 enable = true
