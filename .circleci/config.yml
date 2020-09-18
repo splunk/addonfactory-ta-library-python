@@ -275,37 +275,6 @@ workflows:
       #     filters:
       #       branches:
       #         only: /.*/
-      - splunk-release/tag:
-          name: tag-alpha
-          tag_level: alpha
-          gh_user: ${GH_USER}
-          gh_token: ${GH_PAT}
-          filters:
-            branches:
-              only: develop
-          requires:
-            - build
-      - approval-tag-beta:
-          requires:
-            - tag-alpha
-          type: approval
-          filters:
-            branches:
-              only: develop
-      - splunk-release/tag:
-          name: tag-beta
-          tag_level: beta
-          gh_user: ${GH_USER}
-          gh_token: ${GH_PAT}
-          requires:
-            - approval-tag-beta
-      - approval-merge-beta-to-master:
-          requires:
-            - tag-beta
-          type: approval
-          filters:
-            branches:
-              only: develop
       - splunk-release/merge-to-master:
           name: merge-beta-to-master
           gh_user: ${GH_USER}
