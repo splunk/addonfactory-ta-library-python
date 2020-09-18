@@ -1,2 +1,10 @@
+.cache
+.eggs
+.coverage*
+*.egg-info
+*.idea
+*.DS_Store*
+/build
 *.bak
 *.pyc
+dist
