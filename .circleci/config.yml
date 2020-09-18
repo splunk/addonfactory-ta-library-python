@@ -277,7 +277,7 @@ workflows:
       #         only: /.*/
       - approval-merge-beta-to-master:
           requires:
-            - tag-beta
+            - build
           type: approval
           filters:
             branches:
