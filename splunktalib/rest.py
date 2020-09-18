@@ -8,9 +8,7 @@ from traceback import format_exc
 import splunktalib.common.util as scu
 import splunktalib.common.log as log
 
-import httplib2_helper
 from httplib2 import (socks, ProxyInfo, Http)
-
 
 def splunkd_request(splunkd_uri, session_key, method="GET",
                     headers=None, data=None, timeout=30, retry=1):
