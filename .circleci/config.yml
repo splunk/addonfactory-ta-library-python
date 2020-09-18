@@ -275,8 +275,15 @@ workflows:
       #     filters:
       #       branches:
       #         only: /.*/
+      - approval-tag-alpha:
+          type: approval
+          filters:
+            branches:
+              only: develop
+          requires:
+            - test-unit
       - splunk-release/tag:
-          name: tag-alpha
+          name: approval-tag-alpha
           tag_level: a
           gh_user: ${GH_USER}
           gh_token: ${GH_PAT}
@@ -284,7 +291,7 @@ workflows:
             branches:
               only: develop
           requires:
-            - build
+            - test-unit
       - approval-tag-beta:
           requires:
             - tag-alpha
