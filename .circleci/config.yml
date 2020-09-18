@@ -110,7 +110,7 @@ jobs:
       - save_cache:
           key: poetry-{{ checksum "poetry.lock" }}
           paths:
-            - ~/.poetry
+            - ~/.cache/pypoetry
       - store_artifacts:
           path: dist
       - store_artifacts:
