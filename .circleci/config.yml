@@ -106,6 +106,7 @@ jobs:
           command: |
             source $HOME/.poetry/env
             poetry install            
+            poetry run poetry-dynamic-versioning
             poetry build
       - save_cache:
           key: poetry-{{ checksum "poetry.lock" }}
