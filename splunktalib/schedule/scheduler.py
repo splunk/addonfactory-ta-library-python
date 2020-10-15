@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 from future import standard_library
 standard_library.install_aliases()
 from builtins import object

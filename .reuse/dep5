@@ -1,0 +1,10 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: splunktalib
+Upstream-Contact: Splunk Inc. <addonfactory@splunk.com>
+Source: https://github.com/splunk/addonfactory-ta-library-python
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...

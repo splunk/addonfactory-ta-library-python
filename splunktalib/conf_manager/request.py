@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 import splunktalib.rest as rest
 from splunktalib.common import log
 

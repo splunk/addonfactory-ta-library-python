@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 """
 Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 """

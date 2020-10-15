@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 [tool.poetry]
 name = "splunktalib"
 version = "0.0.0.post6.dev0+1a305c3"
@@ -24,6 +28,10 @@ pytest-cov = "^2"
 poetry-dynamic-versioning = { version = "^0.8", python = "^3.7" }
 pyyaml = "^5.3"
 tomlkit = "^0"
+reuse = "*"
+black = [
+    { version = "20.8b1" , python = "^3.7" }
+]
 
 [tool.poetry-dynamic-versioning]
 enable = true

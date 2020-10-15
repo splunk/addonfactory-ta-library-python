@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 """
 Concurrent executor provides concurrent executing function either in
 a thread pool or a process pool

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 from splunktalib.conf_manager.request import content_request
 import splunktalib.common.util as util
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Splunk Inc.
+#
+# SPDX-License-Identifier: Apache2.0
+
 from builtins import object
 import splunktalib.rest as rest
 import splunktalib.common.xml_dom_parser as xdp
