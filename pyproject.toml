@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "splunktalib"
-version = "0.0.0.post6.dev0+1a305c3"
+version = "0.0.0"
 description = "Supporting library for Splunk Add-ons"
 authors = ["rfaircloth-splunk <rfaircloth@splunk.com>"]
 license = "Apache-2.0"
