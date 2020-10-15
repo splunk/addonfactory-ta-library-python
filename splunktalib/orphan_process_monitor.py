@@ -12,7 +12,6 @@ from splunktalib.common import log
 
 
 class OrphanProcessChecker(object):
-
     def __init__(self, callback=None):
         """
         Only work for Linux platform. On Windows platform, is_orphan is always
@@ -41,7 +40,6 @@ class OrphanProcessChecker(object):
 
 
 class OrphanProcessMonitor(object):
-
     def __init__(self, callback):
         self._checker = OrphanProcessChecker(callback)
         self._thr = threading.Thread(target=self._do_monitor)
@@ -66,5 +64,7 @@ class OrphanProcessMonitor(object):
                     break
                 time.sleep(1)
             except Exception:
-                log.logger.error("Failed to monitor orphan process, reason=%s",
-                                 traceback.format_exc())
+                log.logger.error(
+                    "Failed to monitor orphan process, reason=%s",
+                    traceback.format_exc(),
+                )

@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache2.0
 
 from future import standard_library
+
 standard_library.install_aliases()
 from builtins import object
 import threading
@@ -86,7 +87,7 @@ class Scheduler(object):
                     ready_jobs.append(job)
 
             if ready_jobs:
-                del job_set[:len(ready_jobs)]
+                del job_set[: len(ready_jobs)]
 
             for job in ready_jobs:
                 if job.get_interval() != 0 and not job.stopped():
@@ -97,14 +98,17 @@ class Scheduler(object):
             if job_set:
                 sleep_time = job_set[0].get_expiration() - now
                 if sleep_time < 0:
-                    log.logger.warn("Scheduler satuation, sleep_time=%s",
-                                    sleep_time)
+                    log.logger.warn("Scheduler satuation, sleep_time=%s", sleep_time)
                     sleep_time = 0.1
 
         if ready_jobs:
-            log.logger.info("Get %d ready jobs, next duration is %f, "
-                            "and there are %s jobs scheduling",
-                            len(ready_jobs), sleep_time, total_jobs)
+            log.logger.info(
+                "Get %d ready jobs, next duration is %f, "
+                "and there are %s jobs scheduling",
+                len(ready_jobs),
+                sleep_time,
+                total_jobs,
+            )
 
         ready_jobs.sort(key=lambda job: job.get("priority", 0), reverse=True)
         return (sleep_time, ready_jobs)

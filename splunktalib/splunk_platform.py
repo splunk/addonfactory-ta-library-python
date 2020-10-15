@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache2.0
 
 from future import standard_library
+
 standard_library.install_aliases()
 import os
 import os.path as op
@@ -25,9 +26,10 @@ def make_splunkhome_path(parts):
     fullpath = os.path.normpath(os.path.join(basepath, relpath))
 
     # Check that we haven't escaped from intended parent directories.
-    if os.path.relpath(fullpath, basepath)[0:2] == '..':
-        raise ValueError('Illegal escape from parent directory "%s": %s' %
-                         (basepath, fullpath))
+    if os.path.relpath(fullpath, basepath)[0:2] == "..":
+        raise ValueError(
+            'Illegal escape from parent directory "%s": %s' % (basepath, fullpath)
+        )
 
     return fullpath
 
@@ -57,12 +59,10 @@ def _get_merged_conf_raw(conf_name):
         conf_name = conf_name[:-5]
 
     # FIXME dynamically caculate SPLUNK_HOME
-    btool_cli = [op.join(os.environ["SPLUNK_HOME"], "bin", "btool"),
-                 conf_name, "list"]
+    btool_cli = [op.join(os.environ["SPLUNK_HOME"], "bin", "btool"), conf_name, "list"]
 
     try:
-        p = subprocess.Popen(btool_cli, stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE)
+        p = subprocess.Popen(btool_cli, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
     except OSError:
         raise
@@ -105,6 +105,6 @@ def get_splunkd_uri():
             port_idx = bip.rfind(":")
             if port_idx > 0:
                 bip = bip[:port_idx]
-            port = host_port[host_port.rfind(":"):]
+            port = host_port[host_port.rfind(":") :]
             splunkd_uri = "{}{}{}".format(http, bip, port)
         return splunkd_uri

@@ -28,13 +28,12 @@ class CredNotFound(CredException):
     """
     Credential information not exists
     """
+
     pass
 
 
-def create_credential_manager(username, password, splunkd_uri,
-                              app, owner, realm):
-    session_key = CredentialManager.get_session_key(
-        username, password, splunkd_uri)
+def create_credential_manager(username, password, splunkd_uri, app, owner, realm):
+    session_key = CredentialManager.get_session_key(username, password, splunkd_uri)
     return CredentialManager(splunkd_uri, session_key, app, owner, realm)
 
 
@@ -43,8 +42,7 @@ class CredentialManager(object):
     Credential related interfaces
     """
 
-    def __init__(self, splunkd_uri, session_key,
-                 app="-", owner="nobody", realm=None):
+    def __init__(self, splunkd_uri, session_key, app="-", owner="nobody", realm=None):
         """
         :app: when creating/upating/deleting app is required
         """
@@ -71,8 +69,7 @@ class CredentialManager(object):
         self._app = app
 
     @staticmethod
-    def get_session_key(username, password,
-                        splunkd_uri="https://localhost:8089"):
+    def get_session_key(username, password, splunkd_uri="https://localhost:8089"):
         """
         Get session key by using login username and passwrod
         :return: session_key if successful, None if failed
@@ -85,7 +82,8 @@ class CredentialManager(object):
         }
 
         response, content = rest.splunkd_request(
-            eid, None, method="POST", data=postargs)
+            eid, None, method="POST", data=postargs
+        )
 
         if response is None and content is None:
             raise CredException("Get session key failed.")
@@ -131,7 +129,7 @@ class CredentialManager(object):
         length = SPLUNK_CRED_LEN_LIMIT
         i = 0
         while length < len(str_to_encrypt) + SPLUNK_CRED_LEN_LIMIT:
-            curr_str = str_to_encrypt[length - SPLUNK_CRED_LEN_LIMIT:length]
+            curr_str = str_to_encrypt[length - SPLUNK_CRED_LEN_LIMIT : length]
             length += SPLUNK_CRED_LEN_LIMIT
 
             stanza_name = self._sep.join((name, str(i)))
@@ -142,18 +140,16 @@ class CredentialManager(object):
         try:
             self._create(name, password)
         except CredException:
-            payload = {
-                "password": password
-            }
+            payload = {"password": password}
             endpoint = self._get_endpoint(name)
-            response, _ = rest.splunkd_request(endpoint,
-                                               self._session_key,
-                                               method="POST",
-                                               data=payload)
+            response, _ = rest.splunkd_request(
+                endpoint, self._session_key, method="POST", data=payload
+            )
             if not response or response.status not in (200, 201):
                 raise CredException(
-                    'Unable to update password for username={}, status={}'.format(
-                        name, response.status)
+                    "Unable to update password for username={}, status={}".format(
+                        name, response.status
+                    )
                 )
 
     def _create(self, name, str_to_encrypt):
@@ -169,8 +165,9 @@ class CredentialManager(object):
         }
 
         endpoint = self._get_endpoint(name)
-        resp, content = rest.splunkd_request(endpoint, self._session_key,
-                                             method="POST", data=payload)
+        resp, content = rest.splunkd_request(
+            endpoint, self._session_key, method="POST", data=payload
+        )
         if not resp or resp.status not in (200, 201, "200", "201"):
             raise CredException("Failed to encrypt username {}".format(name))
 
@@ -188,14 +185,14 @@ class CredentialManager(object):
             except Exception:
                 raise
 
-            prefix = self._realm + ':' + name + self._sep
+            prefix = self._realm + ":" + name + self._sep
             for stanza in stanzas:
                 stanza_name = stanza.get("name")
                 match = True
                 try:
-                    if stanza_name[:len(prefix)] != prefix:
+                    if stanza_name[: len(prefix)] != prefix:
                         match = False
-                    num = stanza_name[len(prefix):-1]
+                    num = stanza_name[len(prefix) : -1]
                     int(num)
                 except (IndexError, ValueError):
                     match = False
@@ -217,16 +214,17 @@ class CredentialManager(object):
 
         endpoint = self._get_endpoint(name)
         response, content = rest.splunkd_request(
-            endpoint, self._session_key, method="DELETE")
+            endpoint, self._session_key, method="DELETE"
+        )
 
         if response is not None and response.status in (404, "404"):
             if throw:
-                raise CredNotFound(
-                    "Credential stanza not exits - {}".format(name))
+                raise CredNotFound("Credential stanza not exits - {}".format(name))
         elif not response or response.status not in (200, 201, "200", "201"):
             if throw:
                 raise CredException(
-                    "Failed to delete credential stanza {}".format(name))
+                    "Failed to delete credential stanza {}".format(name)
+                )
 
     def get_all_passwords(self):
         results = {}
@@ -241,20 +239,21 @@ class CredentialManager(object):
                     exist_stanza = results.get(actual_name)
                 else:
                     exist_stanza = stanza
-                    exist_stanza['name'] = actual_name
-                    exist_stanza['username'] = \
-                        exist_stanza['username'].split(self._sep)[0]
-                    exist_stanza['clears'] = {}
-                    exist_stanza['encrs'] = {}
+                    exist_stanza["name"] = actual_name
+                    exist_stanza["username"] = exist_stanza["username"].split(
+                        self._sep
+                    )[0]
+                    exist_stanza["clears"] = {}
+                    exist_stanza["encrs"] = {}
 
                 try:
-                    exist_stanza['clears'][index] = stanza.get('clear_password')
-                    exist_stanza['encrs'][index] = stanza.get('encr_password')
+                    exist_stanza["clears"][index] = stanza.get("clear_password")
+                    exist_stanza["encrs"][index] = stanza.get("encr_password")
                 except KeyError:
-                    exist_stanza['clears'] = {}
-                    exist_stanza['encrs'] = {}
-                    exist_stanza['clears'][index] = stanza.get('clear_password')
-                    exist_stanza['encrs'][index] = stanza.get('encr_password')
+                    exist_stanza["clears"] = {}
+                    exist_stanza["encrs"] = {}
+                    exist_stanza["clears"][index] = stanza.get("clear_password")
+                    exist_stanza["encrs"][index] = stanza.get("encr_password")
 
                 results[actual_name] = exist_stanza
 
@@ -263,19 +262,19 @@ class CredentialManager(object):
 
         # merge the stanzas by index
         for name, stanza in list(results.items()):
-            field_clear = stanza.get('clears')
-            field_encr = stanza.get('encrs')
+            field_clear = stanza.get("clears")
+            field_encr = stanza.get("encrs")
             if isinstance(field_clear, dict):
                 clear_password = ""
                 encr_password = ""
                 for index in sorted(field_clear.keys()):
                     clear_password += field_clear.get(index)
                     encr_password += field_encr.get(index)
-                stanza['clear_password'] = clear_password
-                stanza['encr_password'] = encr_password
+                stanza["clear_password"] = clear_password
+                stanza["encr_password"] = encr_password
 
-                del stanza['clears']
-                del stanza['encrs']
+                del stanza["clears"]
+                del stanza["encrs"]
         return list(results.values())
 
     def _get_all_passwords(self):
@@ -291,7 +290,8 @@ class CredentialManager(object):
 
         endpoint = self._get_endpoint()
         response, content = rest.splunkd_request(
-            endpoint, self._session_key, method="GET")
+            endpoint, self._session_key, method="GET"
+        )
         if response and response.status in (200, 201, "200", "201") and content:
             return xdp.parse_conf_xml_dom(content)
         raise CredException("Failed to get credentials")
@@ -328,16 +328,22 @@ class CredentialManager(object):
                 values = stanza[prop].split(self._sep)
                 if len(values) % 2 == 1:
                     continue
-                result = {values[i]: values[i + 1]
-                          for i in range(0, len(values), 2)}
+                result = {values[i]: values[i + 1] for i in range(0, len(values), 2)}
                 results[stanza.get("username")] = result
         return results
 
     @staticmethod
     def _build_name(realm, name):
         return util.format_stanza_name(
-            "".join((CredentialManager._escape_string(realm), ":",
-                     CredentialManager._escape_string(name), ":")))
+            "".join(
+                (
+                    CredentialManager._escape_string(realm),
+                    ":",
+                    CredentialManager._escape_string(name),
+                    ":",
+                )
+            )
+        )
 
     @staticmethod
     def _escape_string(string_to_escape):
@@ -359,8 +365,10 @@ class CredentialManager(object):
         if name:
             realm_user = self._build_name(self._realm, name)
             rest_endpoint = "{}/servicesNS/{}/{}/storage/passwords/{}".format(
-                self._splunkd_uri, owner, app, realm_user)
+                self._splunkd_uri, owner, app, realm_user
+            )
         else:
-            rest_endpoint = "{}/servicesNS/{}/{}/storage/passwords?count=-1" \
-                            "".format(self._splunkd_uri, owner, app)
+            rest_endpoint = "{}/servicesNS/{}/{}/storage/passwords?count=-1" "".format(
+                self._splunkd_uri, owner, app
+            )
         return rest_endpoint

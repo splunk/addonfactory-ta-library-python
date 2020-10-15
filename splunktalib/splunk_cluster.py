@@ -23,7 +23,6 @@ def _do_rest(uri, session_key):
 
 
 class ServerInfo(object):
-
     def __init__(self, splunkd_uri, session_key):
         uri = "{}/services/server/info".format(splunkd_uri)
         server_info = _do_rest(uri, session_key)
@@ -46,8 +45,8 @@ class ServerInfo(object):
         return False
 
     def is_shc_member(self):
-        for sh in ('shc_member', 'shc_captain'):
-            if sh in self._server_info['server_roles']:
+        for sh in ("shc_member", "shc_captain"):
+            if sh in self._server_info["server_roles"]:
                 return True
         return False
 
@@ -64,18 +63,16 @@ if __name__ == "__main__":
     sp_uri = "https://localhost:8089"
     skey = cred.CredentialManager.get_session_key("admin", "admin")
     si = ServerInfo(sp_uri, skey)
-    assert(not si.is_captain())
+    assert not si.is_captain()
 
     sp_uri = "https://qa-systest-03.sv.splunk.com:1901"
-    skey = cred.CredentialManager.get_session_key(
-        "admin", "notchagneme")
+    skey = cred.CredentialManager.get_session_key("admin", "notchagneme")
     si = ServerInfo(sp_uri, skey)
-    assert(si.is_captain())
-    assert(si.is_search_head())
+    assert si.is_captain()
+    assert si.is_search_head()
 
     sp_uri = "https://qa-systest-01.sv.splunk.com:1901"
-    skey = cred.CredentialManager.get_session_key(
-        "admin", "notchagneme")
+    skey = cred.CredentialManager.get_session_key("admin", "notchagneme")
     si = ServerInfo(sp_uri, skey)
-    assert(not si.is_captain())
-    assert(si.is_search_head())
+    assert not si.is_captain()
+    assert si.is_search_head()

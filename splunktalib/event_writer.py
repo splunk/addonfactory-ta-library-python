@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache2.0
 
 from future import standard_library
+
 standard_library.install_aliases()
 from six import string_types
 from builtins import object
@@ -15,7 +16,6 @@ from splunktalib.common import log
 
 
 class EventWriter(object):
-
     def __init__(self, process_safe=False):
         if process_safe:
             self._mgr = multiprocessing.Manager()
@@ -81,18 +81,20 @@ class EventWriter(object):
                 else:
                     continue
             except Exception:
-                log.logger.exception("EventWriter encounter exception which may"
-                                     "cause data loss, queue leftsize={"
-                                     "}".format(
-                                     event_queue.qsize()))
+                log.logger.exception(
+                    "EventWriter encounter exception which may"
+                    "cause data loss, queue leftsize={"
+                    "}".format(event_queue.qsize())
+                )
                 self._exception = True
                 break
 
-        log.logger.info("Event writer stopped, queue leftsize={}".format(
-            event_queue.qsize()))
+        log.logger.info(
+            "Event writer stopped, queue leftsize={}".format(event_queue.qsize())
+        )
+
 
 class EventWriterWithCheckpoint(EventWriter):
-
     def _do_write_events(self):
         event_queue = self._event_queue
         write = sys.stdout.write
@@ -136,12 +138,14 @@ class EventWriterWithCheckpoint(EventWriter):
                 else:
                     continue
             except Exception:
-                log.logger.exception("EventWriter encounter exception which may"
-                                     "cause data loss, queue leftsize={"
-                                     "}".format(
-                                     event_queue.qsize()))
+                log.logger.exception(
+                    "EventWriter encounter exception which may"
+                    "cause data loss, queue leftsize={"
+                    "}".format(event_queue.qsize())
+                )
                 self._exception = True
                 break
 
-        log.logger.info("Event writer stopped, queue leftsize={}".format(
-            event_queue.qsize()))
+        log.logger.info(
+            "Event writer stopped, queue leftsize={}".format(event_queue.qsize())
+        )

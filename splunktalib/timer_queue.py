@@ -7,6 +7,7 @@ A timer queue implementation
 """
 
 from future import standard_library
+
 standard_library.install_aliases()
 from builtins import object
 import threading
@@ -72,8 +73,10 @@ class TimerQueue(object):
             try:
                 self._timers.remove(timer)
             except ValueError:
-                log.logger.info("Timer=%s is not in queue, move it to cancelling "
-                                "list", timer.ident())
+                log.logger.info(
+                    "Timer=%s is not in queue, move it to cancelling " "list",
+                    timer.ident(),
+                )
             else:
                 self._cancelling_timers[timer.ident()] = timer
 
@@ -117,7 +120,7 @@ class TimerQueue(object):
                     expired_timers.append(timer)
 
             if expired_timers:
-                del self._timers[:len(expired_timers)]
+                del self._timers[: len(expired_timers)]
 
             if self._timers:
                 next_expired_time = self._timers[0].get_expiration()

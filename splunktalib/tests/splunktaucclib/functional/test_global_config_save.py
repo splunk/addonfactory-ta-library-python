@@ -10,6 +10,7 @@ from splunk_add_on_ucc_framework.splunktaucclib.global_config import (
     GlobalConfigSchema,
 )
 
+
 def test_SaveConfig(get_session_key):
 
     payload = {
@@ -23,7 +24,7 @@ def test_SaveConfig(get_session_key):
         ],
     }
     basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    
+
     with open(
         os.path.join(os.path.dirname(basedir), "splunktaucclib/globalConfig.json")
     ) as f:
@@ -32,10 +33,8 @@ def test_SaveConfig(get_session_key):
     schema = GlobalConfigSchema(json.loads(json_schema))
 
     sk = get_session_key[1]
-    
-    global_config = GlobalConfig(
-        get_session_key[0], sk , schema
-    )
+
+    global_config = GlobalConfig(get_session_key[0], sk, schema)
     save_results = global_config.save(payload)
     for result in save_results:
         assert result is None

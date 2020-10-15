@@ -12,8 +12,7 @@ def _property_endpoint_ns(uri, owner, app, conf_name):
     return PROPERTY_ENDPOINT % (uri, owner, app, conf_name)
 
 
-def create_properties(splunkd_uri, session_key, owner, app_name, conf_name,
-                      stanza):
+def create_properties(splunkd_uri, session_key, owner, app_name, conf_name, stanza):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -25,14 +24,12 @@ def create_properties(splunkd_uri, session_key, owner, app_name, conf_name,
     """
 
     uri = _property_endpoint_ns(splunkd_uri, owner, app_name, conf_name)
-    msg = "Properties: failed to create stanza=%s in conf=%s" % \
-          (stanza, conf_name)
+    msg = "Properties: failed to create stanza=%s in conf=%s" % (stanza, conf_name)
     payload = {"__stanza": stanza}
     content_request(uri, session_key, "POST", payload, msg)
 
 
-def get_property(splunkd_uri, session_key, owner, app_name, conf_name,
-                 stanza, key):
+def get_property(splunkd_uri, session_key, owner, app_name, conf_name, stanza, key):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -46,13 +43,17 @@ def get_property(splunkd_uri, session_key, owner, app_name, conf_name,
 
     uri = _property_endpoint_ns(splunkd_uri, owner, app_name, conf_name)
     uri += "/%s/%s" % (util.format_stanza_name(stanza), key)
-    msg = "Properties: failed to get conf=%s, stanza=%s, key=%s" % \
-          (conf_name, stanza, key)
+    msg = "Properties: failed to get conf=%s, stanza=%s, key=%s" % (
+        conf_name,
+        stanza,
+        key,
+    )
     return content_request(uri, session_key, "GET", None, msg)
 
 
-def update_properties(splunkd_uri, session_key, owner, app_name, conf_name,
-                      stanza, key_values):
+def update_properties(
+    splunkd_uri, session_key, owner, app_name, conf_name, stanza, key_values
+):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -66,8 +67,7 @@ def update_properties(splunkd_uri, session_key, owner, app_name, conf_name,
 
     uri = _property_endpoint_ns(splunkd_uri, owner, app_name, conf_name)
     uri += "/" + util.format_stanza_name(stanza)
-    msg = "Properties: failed to update conf=%s, stanza=%s" % \
-          (conf_name, stanza)
+    msg = "Properties: failed to update conf=%s, stanza=%s" % (conf_name, stanza)
 
     has_name = False
     if "name" in key_values:

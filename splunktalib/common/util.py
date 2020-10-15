@@ -7,6 +7,7 @@ Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 """
 
 from future import standard_library
+
 standard_library.install_aliases()
 from builtins import str
 import os
@@ -92,12 +93,11 @@ def extract_datainput_name(stanza_name):
     except ValueError:
         return stanza_name
 
-    return stanza_name[idx + len(sep):]
+    return stanza_name[idx + len(sep) :]
 
 
 def escape_json_control_chars(json_str):
-    control_chars = ((r"\n", "\\\\n"), (r"\r", "\\\\r"),
-                     (r"\r\n", "\\\\r\\\\n"))
+    control_chars = ((r"\n", "\\\\n"), (r"\r", "\\\\r"), (r"\r\n", "\\\\r\\\\n"))
     for ch, replace in control_chars:
         json_str = json_str.replace(ch, replace)
     return json_str
@@ -105,7 +105,7 @@ def escape_json_control_chars(json_str):
 
 def disable_stdout_buffer():
     os.environ["PYTHONUNBUFFERED"] = "1"
-    sys.stdout = os.fdopen(sys.stdout.fileno(), 'wb', 0)
+    sys.stdout = os.fdopen(sys.stdout.fileno(), "wb", 0)
     gc.garbage.append(sys.stdout)
 
 

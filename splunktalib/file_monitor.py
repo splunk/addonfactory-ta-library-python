@@ -10,7 +10,6 @@ from splunktalib.common import log
 
 
 class FileMonitor(object):
-
     def __init__(self, callback, files):
         """
         :files: files to be monidtored with full path
@@ -19,9 +18,7 @@ class FileMonitor(object):
         self._callback = callback
         self._files = files
 
-        self.file_mtimes = {
-            file_name: None for file_name in self._files
-        }
+        self.file_mtimes = {file_name: None for file_name in self._files}
         for k in self.file_mtimes:
             if not op.exists(k):
                 continue
@@ -31,8 +28,9 @@ class FileMonitor(object):
                     continue
                 self.file_mtimes[k] = op.getmtime(k)
             except OSError:
-                log.logger.error("Getmtime for %s, failed: %s",
-                                 k, traceback.format_exc())
+                log.logger.error(
+                    "Getmtime for %s, failed: %s", k, traceback.format_exc()
+                )
 
     def __call__(self):
         return self.check_changes()

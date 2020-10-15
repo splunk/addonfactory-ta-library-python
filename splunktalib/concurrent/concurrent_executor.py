@@ -13,7 +13,6 @@ import splunktalib.concurrent.process_pool as pp
 
 
 class ConcurrentExecutor(object):
-
     def __init__(self, config):
         """
         :param config: dict like object, contains thread_min_size (int),
@@ -21,14 +20,15 @@ class ConcurrentExecutor(object):
                        process_size (int)
         """
 
-        self._io_executor = tp.ThreadPool(config.get("thread_min_size", 0),
-                                          config.get("thread_max_size", 0),
-                                          config.get("task_queue_size", 1024),
-                                          config.get("daemonize_thread", True))
+        self._io_executor = tp.ThreadPool(
+            config.get("thread_min_size", 0),
+            config.get("thread_max_size", 0),
+            config.get("task_queue_size", 1024),
+            config.get("daemonize_thread", True),
+        )
         self._compute_executor = None
         if config.get("process_size", 0):
-            self._compute_executor = pp.ProcessPool(
-                config.get("process_size", 0))
+            self._compute_executor = pp.ProcessPool(config.get("process_size", 0))
 
     def start(self):
         self._io_executor.start()

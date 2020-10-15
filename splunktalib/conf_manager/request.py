@@ -24,8 +24,9 @@ def content_request(uri, session_key, method, payload, err_msg):
     ConfRequestException
     """
 
-    resp, content = rest.splunkd_request(uri, session_key, method,
-                                         data=payload, retry=3)
+    resp, content = rest.splunkd_request(
+        uri, session_key, method, data=payload, retry=3
+    )
     if resp is None and content is None:
         return None
 
@@ -33,7 +34,11 @@ def content_request(uri, session_key, method, payload, err_msg):
         return content
     else:
         msg = "%s, status=%s, reason=%s, detail=%s" % (
-            err_msg, resp.status, resp.reason, content.decode('utf-8'))
+            err_msg,
+            resp.status,
+            resp.reason,
+            content.decode("utf-8"),
+        )
 
         if not (method == "GET" and resp.status == 404):
             log.logger.error(msg)

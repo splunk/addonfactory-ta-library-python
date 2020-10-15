@@ -25,7 +25,7 @@ def parse_conf_xml_dom(xml_content):
     stanza_objs = []
     for entry in xml_conf.iterfind(entry_path):
         for stanza in entry.iterfind(stanza_path):
-            stanza_obj = {"name": stanza.text,"stanza": stanza.text}
+            stanza_obj = {"name": stanza.text, "stanza": stanza.text}
             break
         else:
             continue

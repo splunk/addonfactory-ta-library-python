@@ -25,11 +25,10 @@ class TAConfManager(object):
         if appname is None:
             appname = utils.get_appname_from_path(op.abspath(__file__))
         self._conf_file = conf.conf_file2name(conf_file)
-        self._conf_mgr = conf.ConfManager(splunkd_uri, session_key,
-                                          app_name=appname)
+        self._conf_mgr = conf.ConfManager(splunkd_uri, session_key, app_name=appname)
         self._cred_mgr = cred.CredentialManager(
-            splunkd_uri, session_key, app=appname,
-            owner="nobody", realm=appname)
+            splunkd_uri, session_key, app=appname, owner="nobody", realm=appname
+        )
         self._keys = None
 
     def set_appname(self, appname):
@@ -63,9 +62,9 @@ class TAConfManager(object):
 
         stanza = self._delete_reserved_keys(stanza)
         encrypted_stanza = self._encrypt(stanza)
-        self._conf_mgr.create_stanza(self._conf_file,
-                                     encrypted_stanza["name"],
-                                     encrypted_stanza)
+        self._conf_mgr.create_stanza(
+            self._conf_file, encrypted_stanza["name"], encrypted_stanza
+        )
 
     def update(self, stanza):
         """
@@ -86,7 +85,8 @@ class TAConfManager(object):
             stanza = self._delete_reserved_keys(stanza)
             encrypted_stanza = self._encrypt(stanza)
             self._conf_mgr.update_properties(
-                self._conf_file, encrypted_stanza["name"], encrypted_stanza)
+                self._conf_file, encrypted_stanza["name"], encrypted_stanza
+            )
 
     def delete(self, stanza_name):
         """
@@ -106,8 +106,9 @@ class TAConfManager(object):
         @return: dict object if sucess otherwise raise exception
         """
 
-        stanza = self._conf_mgr.get_stanza(self._conf_file, stanza_name,
-                                           ret_metadata=return_acl)
+        stanza = self._conf_mgr.get_stanza(
+            self._conf_file, stanza_name, ret_metadata=return_acl
+        )
         stanza = self._decrypt(stanza)
         stanza["disabled"] = utils.is_true(stanza.get("disabled"))
         return stanza
@@ -119,8 +120,7 @@ class TAConfManager(object):
         """
 
         results = {}
-        stanzas = self._conf_mgr.all_stanzas(self._conf_file,
-                                             ret_metadata=return_acl)
+        stanzas = self._conf_mgr.all_stanzas(self._conf_file, ret_metadata=return_acl)
         for stanza in stanzas:
             stanza = self._decrypt(stanza)
             stanza["disabled"] = utils.is_true(stanza.get("disabled"))
@@ -191,8 +191,7 @@ class TAConfManager(object):
         clear_password = None
         for key in self._keys:
             if key in stanza and stanza[key] == self.encrypted_token:
-                clear_password = self._cred_mgr.get_clear_password(
-                    stanza_name)
+                clear_password = self._cred_mgr.get_clear_password(stanza_name)
                 break
 
         if clear_password:

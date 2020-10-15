@@ -14,9 +14,13 @@ from splunktalib.common import log
 import threading
 
 
-def get_state_store(meta_configs, appname, collection_name="talib_states",
-                    use_kv_store=False,
-                    use_cached_store=False):
+def get_state_store(
+    meta_configs,
+    appname,
+    collection_name="talib_states",
+    use_kv_store=False,
+    use_cached_store=False,
+):
     if util.is_true(use_kv_store):
         return StateStore(meta_configs, appname, collection_name)
     elif util.is_true(use_cached_store):
@@ -44,7 +48,6 @@ class BaseStateStore(object):
 
 
 class StateStore(BaseStateStore):
-
     def __init__(self, meta_configs, appname, collection_name="talib_states"):
         """
         :meta_configs: dict like and contains checkpoint_dir, session_key,
@@ -60,8 +63,9 @@ class StateStore(BaseStateStore):
         self._states_cache = {}
         self._kv_client = None
         self._collection = collection_name
-        self._kv_client = kvc.KVClient(meta_configs["server_uri"],
-                                       meta_configs["session_key"])
+        self._kv_client = kvc.KVClient(
+            meta_configs["server_uri"], meta_configs["session_key"]
+        )
         kvc.create_collection(self._kv_client, self._collection, self._appname)
         self._load_states_cache()
 
@@ -73,12 +77,14 @@ class StateStore(BaseStateStore):
 
         if key not in self._states_cache:
             self._kv_client.insert_collection_data(
-                self._collection, {"_key": key, "value": json.dumps(states)},
-                self._appname)
+                self._collection,
+                {"_key": key, "value": json.dumps(states)},
+                self._appname,
+            )
         else:
             self._kv_client.update_collection_data(
-                self._collection, key, {"value": json.dumps(states)},
-                self._appname)
+                self._collection, key, {"value": json.dumps(states)}, self._appname
+            )
         self._states_cache[key] = states
 
     def get_state(self, key=None):
@@ -96,13 +102,13 @@ class StateStore(BaseStateStore):
         if key not in self._states_cache:
             return
 
-        self._kv_client.delete_collection_data(
-            self._collection, key, self._appname)
+        self._kv_client.delete_collection_data(self._collection, key, self._appname)
         del self._states_cache[key]
 
     def _load_states_cache(self):
         states = self._kv_client.get_collection_data(
-            self._collection, None, self._appname)
+            self._collection, None, self._appname
+        )
         if not states:
             return
 
@@ -173,8 +179,8 @@ class CachedFileStateStore(BaseStateStore):
         """
 
         super(CachedFileStateStore, self).__init__(meta_configs, appname)
-        self._states_cache = {} # item: time, dict
-        self._states_cache_lmd = {} # item: time, dict
+        self._states_cache = {}  # item: time, dict
+        self._states_cache_lmd = {}  # item: time, dict
         self.max_cache_seconds = max_cache_seconds
         self._lock = threading.RLock()
 
@@ -251,8 +257,9 @@ class CachedFileStateStore(BaseStateStore):
                         self._states_cache.clear()
                         self._states_cache_lmd.clear()
                     elif key in self._states_cache:
-                        self.update_state_flush(self._states_cache[key][0], key,
-                                                self._states_cache[key][1])
+                        self.update_state_flush(
+                            self._states_cache[key][0], key, self._states_cache[key][1]
+                        )
                         del self._states_cache[key]
                         del self._states_cache_lmd[key]
             except Exception:

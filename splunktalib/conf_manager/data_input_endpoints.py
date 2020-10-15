@@ -15,8 +15,9 @@ def _input_endpoint_ns(uri, owner, app, input_type):
     return INPUT_ENDPOINT % (uri, owner, app, input_type)
 
 
-def reload_data_input(splunkd_uri, session_key, owner, app_name,
-                      input_type, throw=False):
+def reload_data_input(
+    splunkd_uri, session_key, owner, app_name, input_type, throw=False
+):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -37,8 +38,9 @@ def reload_data_input(splunkd_uri, session_key, owner, app_name,
             raise
 
 
-def create_data_input(splunkd_uri, session_key, owner, app_name, input_type,
-                      name, key_values):
+def create_data_input(
+    splunkd_uri, session_key, owner, app_name, input_type, name, key_values
+):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -53,15 +55,17 @@ def create_data_input(splunkd_uri, session_key, owner, app_name, input_type,
     :return: None on success else raise exception
     """
 
-    key_values["name"] = str(name).encode('utf-8')
+    key_values["name"] = str(name).encode("utf-8")
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     msg = "Failed to create data input in app=%s: %s://%s" % (
-        app_name, input_type, name)
+        app_name,
+        input_type,
+        name,
+    )
     content_request(uri, session_key, "POST", key_values, msg)
 
 
-def get_data_input(splunkd_uri, session_key, owner, app_name, input_type,
-                   name=None):
+def get_data_input(splunkd_uri, session_key, owner, app_name, input_type, name=None):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -83,13 +87,17 @@ def get_data_input(splunkd_uri, session_key, owner, app_name, input_type,
     uri += "?count=0&offset=0"
 
     msg = "Failed to get data input in app=%s: %s://%s" % (
-        app_name, input_type, name if name else name)
+        app_name,
+        input_type,
+        name if name else name,
+    )
     content = content_request(uri, session_key, "GET", None, msg)
     return xdp.parse_conf_xml_dom(content)
 
 
-def update_data_input(splunkd_uri, session_key, owner, app_name, input_type,
-                      name, key_values):
+def update_data_input(
+    splunkd_uri, session_key, owner, app_name, input_type, name, key_values
+):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -109,12 +117,14 @@ def update_data_input(splunkd_uri, session_key, owner, app_name, input_type,
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     uri += "/" + util.format_stanza_name(name)
     msg = "Failed to update data input in app=%s: %s://%s" % (
-        app_name, input_type, name)
+        app_name,
+        input_type,
+        name,
+    )
     content_request(uri, session_key, "POST", key_values, msg)
 
 
-def delete_data_input(splunkd_uri, session_key, owner, app_name, input_type,
-                      name):
+def delete_data_input(splunkd_uri, session_key, owner, app_name, input_type, name):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -131,12 +141,16 @@ def delete_data_input(splunkd_uri, session_key, owner, app_name, input_type,
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     uri += "/" + util.format_stanza_name(name)
     msg = "Failed to delete data input in app=%s: %s://%s" % (
-        app_name, input_type, name)
+        app_name,
+        input_type,
+        name,
+    )
     content_request(uri, session_key, "DELETE", None, msg)
 
 
-def operate_data_input(splunkd_uri, session_key, owner, app_name,
-                       input_type, name, operation):
+def operate_data_input(
+    splunkd_uri, session_key, owner, app_name, input_type, name, operation
+):
     """
     :param splunkd_uri: splunkd uri, e.g. https://127.0.0.1:8089
     :param session_key: splunkd session key
@@ -154,5 +168,9 @@ def operate_data_input(splunkd_uri, session_key, owner, app_name,
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     uri += "/%s/%s" % (util.format_stanza_name(name), operation)
     msg = "Failed to %s data input in app=%s: %s://%s" % (
-        operation, app_name, input_type, name)
+        operation,
+        app_name,
+        input_type,
+        name,
+    )
     content_request(uri, session_key, "POST", None, msg)
