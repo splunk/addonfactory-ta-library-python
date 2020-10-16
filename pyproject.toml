@@ -8,7 +8,7 @@ version = "0.0.0"
 description = "Supporting library for Splunk Add-ons"
 authors = ["rfaircloth-splunk <rfaircloth@splunk.com>"]
 license = "Apache-2.0"
-repository = https://github.com/splunk/addonfactory-ta-library-python
+repository = "https://github.com/splunk/addonfactory-ta-library-python"
 
 [tool.poetry.dependencies]
 python = "~2.7 || ^3.7"
