@@ -151,20 +151,23 @@ jobs:
             source $HOME/.poetry/env
             poetry install
             poetry run poetry-dynamic-versioning
-            poetry publish --build -u ${TWINE_USERNAME} -p ${TWINE_PASSWORD}
+            poetry publish --build -u ${PYPI_USERNAME} -p ${PYPI_TOKEN}
 
 workflows:
   main:
     jobs:
       - build
       - release:
+          context:
+            - gdi-github
           requires:
             - build
-
 
   publish:
     jobs:
       - publish-pypi:
+          context:
+            - gdi-pypi
           filters:
             branches:
               ignore: /.*/
