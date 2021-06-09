@@ -21,14 +21,6 @@ mock = "^4"
 pytest-expect = "^1.1.0"
 pytest = "^6"
 pytest-cov = "^2"
-poetry-dynamic-versioning = "^0"
-pyyaml = "^5"
-tomlkit = "^0"
-reuse = "*"
-black = "21.5b2"
-
-[tool.poetry-dynamic-versioning]
-enable = true
 
 [build-system]
 requires = ["poetry>=1.0.0"]
