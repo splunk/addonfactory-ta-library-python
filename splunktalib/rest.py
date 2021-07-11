@@ -2,9 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from future import standard_library
-
-standard_library.install_aliases()
 import urllib.request, urllib.parse, urllib.error
 import json
 from traceback import format_exc
