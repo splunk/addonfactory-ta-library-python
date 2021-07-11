@@ -2,12 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from builtins import object
 import splunktalib.common.xml_dom_parser as xdp
 import splunktalib.conf_manager.request as req
 
 
-class KnowledgeObjectManager(object):
+class KnowledgeObjectManager:
     def __init__(self, splunkd_uri, session_key):
         self.splunkd_uri = splunkd_uri
         self.session_key = session_key

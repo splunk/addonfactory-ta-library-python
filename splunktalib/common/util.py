@@ -9,7 +9,6 @@ Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 from future import standard_library
 
 standard_library.install_aliases()
-from builtins import str
 import os
 import os.path as op
 import datetime

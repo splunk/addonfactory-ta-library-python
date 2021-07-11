@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from builtins import str
 import splunktalib.common.xml_dom_parser as xdp
 import splunktalib.common.util as util
 from splunktalib.conf_manager.request import content_request
@@ -30,7 +29,7 @@ def reload_data_input(
 
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     uri += "/_reload"
-    msg = "Failed to reload data input in app=%s: %s" % (app_name, input_type)
+    msg = "Failed to reload data input in app={}: {}".format(app_name, input_type)
     try:
         content_request(uri, session_key, "GET", None, msg)
     except Exception:
@@ -57,7 +56,7 @@ def create_data_input(
 
     key_values["name"] = str(name).encode("utf-8")
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
-    msg = "Failed to create data input in app=%s: %s://%s" % (
+    msg = "Failed to create data input in app={}: {}://{}".format(
         app_name,
         input_type,
         name,
@@ -86,7 +85,7 @@ def get_data_input(splunkd_uri, session_key, owner, app_name, input_type, name=N
     # get all the stanzas at one time
     uri += "?count=0&offset=0"
 
-    msg = "Failed to get data input in app=%s: %s://%s" % (
+    msg = "Failed to get data input in app={}: {}://{}".format(
         app_name,
         input_type,
         name if name else name,
@@ -116,7 +115,7 @@ def update_data_input(
         del key_values["name"]
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     uri += "/" + util.format_stanza_name(name)
-    msg = "Failed to update data input in app=%s: %s://%s" % (
+    msg = "Failed to update data input in app={}: {}://{}".format(
         app_name,
         input_type,
         name,
@@ -140,7 +139,7 @@ def delete_data_input(splunkd_uri, session_key, owner, app_name, input_type, nam
 
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
     uri += "/" + util.format_stanza_name(name)
-    msg = "Failed to delete data input in app=%s: %s://%s" % (
+    msg = "Failed to delete data input in app={}: {}://{}".format(
         app_name,
         input_type,
         name,
@@ -166,8 +165,8 @@ def operate_data_input(
 
     assert operation in ("disable", "enable")
     uri = _input_endpoint_ns(splunkd_uri, owner, app_name, input_type)
-    uri += "/%s/%s" % (util.format_stanza_name(name), operation)
-    msg = "Failed to %s data input in app=%s: %s://%s" % (
+    uri += "/{}/{}".format(util.format_stanza_name(name), operation)
+    msg = "Failed to {} data input in app={}: {}://{}".format(
         operation,
         app_name,
         input_type,

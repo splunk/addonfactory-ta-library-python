@@ -5,13 +5,10 @@
 """
 A simple thread pool implementation
 """
-from __future__ import division
 
 from future import standard_library
 
 standard_library.install_aliases()
-from builtins import range
-from builtins import object
 import threading
 import queue
 import multiprocessing
@@ -20,7 +17,7 @@ from time import time
 from splunktalib.common import log
 
 
-class ThreadPool(object):
+class ThreadPool:
     """
     A simple thread pool implementation
     """
@@ -280,7 +277,7 @@ class ThreadPool(object):
         )
 
 
-class AsyncResult(object):
+class AsyncResult:
     def __init__(self, func, args, kwargs, callback):
         self._func = func
         self._args = args

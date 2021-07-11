@@ -6,7 +6,6 @@
 This module hanles configuration related stuff
 """
 
-from builtins import object
 import os.path as op
 
 import splunktalib.conf_manager.conf_endpoints as scmc
@@ -22,7 +21,7 @@ def conf_file2name(conf_file):
     return conf_name
 
 
-class ConfManager(object):
+class ConfManager:
     def __init__(self, splunkd_uri, session_key, owner="nobody", app_name="-"):
         """
         :app_name: when creating conf stanza, app_name is required to set not

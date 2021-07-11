@@ -6,7 +6,6 @@
 This module hanles high level TA configuration related stuff
 """
 
-from builtins import object
 import os.path as op
 import copy
 
@@ -16,7 +15,7 @@ import splunktalib.conf_manager.conf_manager as conf
 import splunktalib.conf_manager.request as conf_req
 
 
-class TAConfManager(object):
+class TAConfManager:
 
     encrypted_token = "******"
     reserved_keys = ("userName", "appName")

@@ -2,14 +2,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from builtins import object
 import os.path as op
 import traceback
 
 from splunktalib.common import log
 
 
-class FileMonitor(object):
+class FileMonitor:
     def __init__(self, callback, files):
         """
         :files: files to be monidtored with full path

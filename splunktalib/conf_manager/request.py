@@ -33,7 +33,7 @@ def content_request(uri, session_key, method, payload, err_msg):
     if resp.status >= 200 and resp.status <= 204:
         return content
     else:
-        msg = "%s, status=%s, reason=%s, detail=%s" % (
+        msg = "{}, status={}, reason={}, detail={}".format(
             err_msg,
             resp.status,
             resp.reason,

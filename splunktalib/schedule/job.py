@@ -2,12 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from builtins import object
 import threading
 import time
 
 
-class Job(object):
+class Job:
     """
     Timer wraps the callback and timestamp related stuff
     """

@@ -5,7 +5,6 @@
 from future import standard_library
 
 standard_library.install_aliases()
-from builtins import object
 import threading
 from time import time
 import random
@@ -13,7 +12,7 @@ import queue
 from splunktalib.common import log
 
 
-class Scheduler(object):
+class Scheduler:
     """
     A simple scheduler which schedules the periodic or once event
     """
