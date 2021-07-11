@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from six import string_types
 import queue
 import multiprocessing
 import threading
