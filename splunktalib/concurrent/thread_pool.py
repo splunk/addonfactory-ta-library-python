@@ -6,9 +6,6 @@
 A simple thread pool implementation
 """
 
-from future import standard_library
-
-standard_library.install_aliases()
 import threading
 import queue
 import multiprocessing

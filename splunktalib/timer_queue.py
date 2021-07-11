@@ -6,9 +6,6 @@
 A timer queue implementation
 """
 
-from future import standard_library
-
-standard_library.install_aliases()
 import threading
 import queue
 from time import time
