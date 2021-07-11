@@ -7,12 +7,11 @@ Concurrent executor provides concurrent executing function either in
 a thread pool or a process pool
 """
 
-from builtins import object
 import splunktalib.concurrent.thread_pool as tp
 import splunktalib.concurrent.process_pool as pp
 
 
-class ConcurrentExecutor(object):
+class ConcurrentExecutor:
     def __init__(self, config):
         """
         :param config: dict like object, contains thread_min_size (int),

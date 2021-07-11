@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from builtins import object
 import splunktalib.rest as rest
 import splunktalib.common.xml_dom_parser as xdp
 
@@ -22,7 +21,7 @@ def _do_rest(uri, session_key):
     return stanza_objs[0]
 
 
-class ServerInfo(object):
+class ServerInfo:
     def __init__(self, splunkd_uri, session_key):
         uri = "{}/services/server/info".format(splunkd_uri)
         server_info = _do_rest(uri, session_key)

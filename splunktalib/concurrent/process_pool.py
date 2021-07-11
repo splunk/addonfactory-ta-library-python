@@ -6,12 +6,11 @@
 A wrapper of multiprocessing.pool
 """
 
-from builtins import object
 import multiprocessing
 from splunktalib.common import log
 
 
-class ProcessPool(object):
+class ProcessPool:
     """
     A simple wrapper of multiprocessing.pool
     """

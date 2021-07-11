@@ -6,7 +6,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from six import string_types
-from builtins import object
 import queue
 import multiprocessing
 import threading
@@ -15,7 +14,7 @@ from collections import Iterable
 from splunktalib.common import log
 
 
-class EventWriter(object):
+class EventWriter:
     def __init__(self, process_safe=False):
         if process_safe:
             self._mgr = multiprocessing.Manager()
@@ -64,7 +63,7 @@ class EventWriter(object):
             try:
                 event = event_queue.get(timeout=3)
                 if event is not None:
-                    if isinstance(event, string_types):
+                    if isinstance(event, str):
                         write(event.encode("utf-8"))
                     elif isinstance(event, Iterable):
                         for evt in event:
@@ -110,7 +109,7 @@ class EventWriterWithCheckpoint(EventWriter):
                     # and value of checkpoint: (ckpt_mgr_obj, key, state)
                     events = event[0]
                     ckpt_tuple = event[1]
-                    if isinstance(events, string_types):
+                    if isinstance(events, str):
                         write(events.encode("utf-8"))
                     elif isinstance(events, Iterable):
                         for evt in events:

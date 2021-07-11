@@ -17,9 +17,9 @@ def parse_conf_xml_dom(xml_content):
     sub_ns = m.group(1)
     entry_path = "./{%s}entry" % ns
     stanza_path = "./{%s}title" % ns
-    key_path = "./{%s}content/{%s}dict/{%s}key" % (ns, sub_ns, sub_ns)
-    meta_path = "./{%s}dict/{%s}key" % (sub_ns, sub_ns)
-    list_path = "./{%s}list/{%s}item" % (sub_ns, sub_ns)
+    key_path = "./{{{}}}content/{{{}}}dict/{{{}}}key".format(ns, sub_ns, sub_ns)
+    meta_path = "./{{{}}}dict/{{{}}}key".format(sub_ns, sub_ns)
+    list_path = "./{{{}}}list/{{{}}}item".format(sub_ns, sub_ns)
 
     xml_conf = et.fromstring(xml_content)
     stanza_objs = []

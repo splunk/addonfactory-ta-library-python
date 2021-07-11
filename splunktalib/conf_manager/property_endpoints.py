@@ -24,7 +24,7 @@ def create_properties(splunkd_uri, session_key, owner, app_name, conf_name, stan
     """
 
     uri = _property_endpoint_ns(splunkd_uri, owner, app_name, conf_name)
-    msg = "Properties: failed to create stanza=%s in conf=%s" % (stanza, conf_name)
+    msg = "Properties: failed to create stanza={} in conf={}".format(stanza, conf_name)
     payload = {"__stanza": stanza}
     content_request(uri, session_key, "POST", payload, msg)
 
@@ -42,8 +42,8 @@ def get_property(splunkd_uri, session_key, owner, app_name, conf_name, stanza, k
     """
 
     uri = _property_endpoint_ns(splunkd_uri, owner, app_name, conf_name)
-    uri += "/%s/%s" % (util.format_stanza_name(stanza), key)
-    msg = "Properties: failed to get conf=%s, stanza=%s, key=%s" % (
+    uri += "/{}/{}".format(util.format_stanza_name(stanza), key)
+    msg = "Properties: failed to get conf={}, stanza={}, key={}".format(
         conf_name,
         stanza,
         key,
@@ -67,7 +67,7 @@ def update_properties(
 
     uri = _property_endpoint_ns(splunkd_uri, owner, app_name, conf_name)
     uri += "/" + util.format_stanza_name(stanza)
-    msg = "Properties: failed to update conf=%s, stanza=%s" % (conf_name, stanza)
+    msg = "Properties: failed to update conf={}, stanza={}".format(conf_name, stanza)
 
     has_name = False
     if "name" in key_values:

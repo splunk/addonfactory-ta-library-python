@@ -5,7 +5,6 @@
 from future import standard_library
 
 standard_library.install_aliases()
-from builtins import range
 import urllib.request, urllib.parse, urllib.error
 import json
 from traceback import format_exc
@@ -24,7 +23,7 @@ def splunkd_request(
     """
 
     headers = headers if headers is not None else {}
-    headers["Authorization"] = "Splunk {0}".format(session_key)
+    headers["Authorization"] = "Splunk {}".format(session_key)
     content_type = headers.get("Content-Type")
     if not content_type:
         content_type = headers.get("content-type")

@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from builtins import object
 import os
 import threading
 import time
@@ -11,7 +10,7 @@ import traceback
 from splunktalib.common import log
 
 
-class OrphanProcessChecker(object):
+class OrphanProcessChecker:
     def __init__(self, callback=None):
         """
         Only work for Linux platform. On Windows platform, is_orphan is always
@@ -39,7 +38,7 @@ class OrphanProcessChecker(object):
         return res
 
 
-class OrphanProcessMonitor(object):
+class OrphanProcessMonitor:
     def __init__(self, callback):
         self._checker = OrphanProcessChecker(callback)
         self._thr = threading.Thread(target=self._do_monitor)

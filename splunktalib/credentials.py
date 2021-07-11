@@ -6,9 +6,6 @@
 Handles credentials related stuff
 """
 
-from builtins import str
-from builtins import range
-from builtins import object
 import re
 import defusedxml.minidom as xdm
 
@@ -37,7 +34,7 @@ def create_credential_manager(username, password, splunkd_uri, app, owner, realm
     return CredentialManager(splunkd_uri, session_key, app, owner, realm)
 
 
-class CredentialManager(object):
+class CredentialManager:
     """
     Credential related interfaces
     """
