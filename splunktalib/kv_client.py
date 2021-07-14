@@ -4,7 +4,7 @@
 
 import re
 import json
-from defusedxml import cElementTree as et
+from defusedxml import ElementTree as et
 
 import splunktalib.rest as rest
 

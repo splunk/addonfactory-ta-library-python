@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import re
-from defusedxml import cElementTree as et
+from defusedxml import ElementTree as et
 
 
 def parse_conf_xml_dom(xml_content):
