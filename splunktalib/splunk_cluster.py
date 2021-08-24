@@ -54,24 +54,3 @@ class ServerInfo:
 
     def to_dict(self):
         return self._server_info
-
-
-if __name__ == "__main__":
-    import splunktalib.credentials as cred
-
-    sp_uri = "https://localhost:8089"
-    skey = cred.CredentialManager.get_session_key("admin", "admin")
-    si = ServerInfo(sp_uri, skey)
-    assert not si.is_captain()
-
-    sp_uri = "https://qa-systest-03.sv.splunk.com:1901"
-    skey = cred.CredentialManager.get_session_key("admin", "notchagneme")
-    si = ServerInfo(sp_uri, skey)
-    assert si.is_captain()
-    assert si.is_search_head()
-
-    sp_uri = "https://qa-systest-01.sv.splunk.com:1901"
-    skey = cred.CredentialManager.get_session_key("admin", "notchagneme")
-    si = ServerInfo(sp_uri, skey)
-    assert not si.is_captain()
-    assert si.is_search_head()
