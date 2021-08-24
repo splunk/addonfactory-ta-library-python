@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import sys
 import subprocess
+import sys
 import traceback
 
 import splunktalib.splunk_platform as sp

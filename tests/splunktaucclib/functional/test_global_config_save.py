@@ -2,9 +2,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import pytest
 import json
 import os
+
+import pytest
 from splunk_add_on_ucc_framework.splunktaucclib.global_config import (
     GlobalConfig,
     GlobalConfigSchema,

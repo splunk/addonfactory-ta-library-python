@@ -2,14 +2,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import urllib.request, urllib.parse, urllib.error
 import json
+import urllib.error
+import urllib.parse
+import urllib.request
 from traceback import format_exc
 
-import splunktalib.common.util as scu
-import splunktalib.common.log as log
+from httplib2 import Http, ProxyInfo, socks
 
-from httplib2 import socks, ProxyInfo, Http
+import splunktalib.common.log as log
+import splunktalib.common.util as scu
 
 
 def splunkd_request(

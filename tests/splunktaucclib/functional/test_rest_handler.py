@@ -2,9 +2,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import unittest
-import subprocess
 import json
+import subprocess
+import unittest
+
 import pytest
 
 

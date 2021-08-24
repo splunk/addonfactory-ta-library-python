@@ -7,6 +7,7 @@ Handles credentials related stuff
 """
 
 import re
+
 import defusedxml.minidom as xdm
 
 import splunktalib.common.util as util

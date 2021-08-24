@@ -7,8 +7,8 @@ Concurrent executor provides concurrent executing function either in
 a thread pool or a process pool
 """
 
-import splunktalib.concurrent.thread_pool as tp
 import splunktalib.concurrent.process_pool as pp
+import splunktalib.concurrent.thread_pool as tp
 
 
 class ConcurrentExecutor:

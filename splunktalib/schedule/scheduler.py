@@ -2,10 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import queue
+import random
 import threading
 from time import time
-import random
-import queue
+
 from splunktalib.common import log
 
 

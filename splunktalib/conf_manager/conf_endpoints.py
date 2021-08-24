@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import splunktalib.common.xml_dom_parser as xdp
 import splunktalib.common.util as util
+import splunktalib.common.xml_dom_parser as xdp
 from splunktalib.conf_manager.request import content_request
 
 CONF_ENDPOINT = "%s/servicesNS/%s/%s/configs/conf-%s"

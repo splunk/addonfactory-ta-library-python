@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from splunktalib.conf_manager.request import content_request
 import splunktalib.common.util as util
+from splunktalib.conf_manager.request import content_request
 
 PROPERTY_ENDPOINT = "%s/servicesNS/%s/%s/properties/%s"
 

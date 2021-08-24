@@ -7,6 +7,7 @@ A wrapper of multiprocessing.pool
 """
 
 import multiprocessing
+
 from splunktalib.common import log
 
 
