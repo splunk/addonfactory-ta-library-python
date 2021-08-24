@@ -2,11 +2,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import queue
 import multiprocessing
-import threading
+import queue
 import sys
+import threading
 from collections import Iterable
+
 from splunktalib.common import log
 
 

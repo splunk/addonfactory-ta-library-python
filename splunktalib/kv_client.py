@@ -2,8 +2,9 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import re
 import json
+import re
+
 from defusedxml import ElementTree as et
 
 import splunktalib.rest as rest

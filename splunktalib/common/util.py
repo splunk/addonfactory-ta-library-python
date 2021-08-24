@@ -6,12 +6,14 @@
 Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 """
 
+import datetime
+import gc
 import os
 import os.path as op
-import datetime
 import sys
-import gc
-import urllib.request, urllib.parse, urllib.error
+import urllib.error
+import urllib.parse
+import urllib.request
 
 
 def handle_tear_down_signals(callback):

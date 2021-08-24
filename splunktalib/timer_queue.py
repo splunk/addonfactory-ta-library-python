@@ -6,13 +6,13 @@
 A timer queue implementation
 """
 
-import threading
 import queue
-from time import time
+import threading
 import traceback
+from time import time
 
-from splunktalib.timer import Timer
 from splunktalib.common import log
+from splunktalib.timer import Timer
 
 
 class TimerQueue:

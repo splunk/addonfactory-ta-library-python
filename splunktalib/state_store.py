@@ -2,14 +2,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import os.path as op
-import os
 import json
-import time
-import splunktalib.kv_client as kvc
-from splunktalib.common import util
-from splunktalib.common import log
+import os
+import os.path as op
 import threading
+import time
+
+import splunktalib.kv_client as kvc
+from splunktalib.common import log, util
 
 
 def get_state_store(

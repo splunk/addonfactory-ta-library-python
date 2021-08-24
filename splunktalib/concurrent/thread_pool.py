@@ -6,11 +6,12 @@
 A simple thread pool implementation
 """
 
-import threading
-import queue
 import multiprocessing
+import queue
+import threading
 import traceback
 from time import time
+
 from splunktalib.common import log
 
 

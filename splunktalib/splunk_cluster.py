@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import splunktalib.rest as rest
 import splunktalib.common.xml_dom_parser as xdp
+import splunktalib.rest as rest
 
 
 def _do_rest(uri, session_key):
