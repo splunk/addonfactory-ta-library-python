@@ -141,6 +141,18 @@ jobs:
         with:
           submodules: false
           persist-credentials: false
+      - name: Semantic Release Get Next
+        id: semantic
+        if: github.event_name != 'pull_request'
+        uses: cycjimmy/semantic-release-action@v2.5.4
+        with:
+          semantic_version: 17
+          extra_plugins: |
+            @semantic-release/exec
+            @semantic-release/git
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
       - name: Semantic Release
         id: semantic
         uses: cycjimmy/semantic-release-action@v2.5.4
