@@ -123,3 +123,34 @@ jobs:
         with:
           name: Package
           path: dist/
+  publish:
+    if: always()
+    needs:
+      - lint
+      - semgrep
+      - snyk
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: exit without publish if PR
+        if: github.event_name == 'pull_request'
+        run: |
+        exit 1
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+          persist-credentials: false
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v2.5.4
+        with:
+          semantic_version: 17
+          extra_plugins: |
+            @semantic-release/exec
+            @semantic-release/git
+            @semantic-release/commit-analyzer
+            @semantic-release/release-notes-generator
+            @semantic-release/github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
