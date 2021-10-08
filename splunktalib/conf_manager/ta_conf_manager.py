@@ -49,7 +49,7 @@ class TAConfManager:
 
     def create(self, stanza):
         """
-        @stanza: dick like object
+        @stanza: dict like object
         {
         "name": xxx,
         "k1": v1,
@@ -67,7 +67,7 @@ class TAConfManager:
 
     def update(self, stanza):
         """
-        @stanza: dick like object
+        @stanza: dict like object
         {
         "name": xxx,
         "k1": v1,
