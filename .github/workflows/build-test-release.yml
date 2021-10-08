@@ -7,9 +7,12 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
-      - "github-action-migration"
+      - "main"
+      - "develop"
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
+  pull_request:
+    branches: [main, develop]
 jobs: 
   compliance-dependencies:
     name: Compliance Dependencies
@@ -133,8 +136,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: exit without publish if PR
-        if: github.event_name == 'pull_request'
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
+          echo "Exiting Publish stage for PR runs."
           exit 1
       - name: Checkout
         uses: actions/checkout@v2
