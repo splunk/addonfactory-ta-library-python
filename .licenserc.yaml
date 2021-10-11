@@ -19,17 +19,14 @@ header:
     copyright-owner: Splunk Inc.
 
   paths-ignore:
-    - ".circleci/"
     - ".github/"
     - ".vscode/"
     - ".reuse/"
     - "dist"
-    - "licenses"
     - "**/*.md"
-    - "LICENSE"
+    - "LICENSES"
     - "NOTICE"
     - "*.lock"
-    - "docs/**"
     - "tests/**"
     - ".*"
 
