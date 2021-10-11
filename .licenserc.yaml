@@ -24,7 +24,7 @@ header:
     - ".reuse/"
     - "dist"
     - "**/*.md"
-    - "LICENSES"
+    - "LICENSE"
     - "NOTICE"
     - "*.lock"
     - "tests/**"
