@@ -154,6 +154,7 @@ jobs:
         with:
           scanArguments: "--max_dept 50 -x .github/workflows/exclude-patterns.txt"
   publish:
+    if: github.event_name != 'pull_request'
     needs:
       - pre-commit
       - semgrep
@@ -162,11 +163,6 @@ jobs:
       - review_secrets
     runs-on: ubuntu-latest
     steps:
-      - name: exit without publish if PR
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          echo "Exiting Publish stage for PR runs."
-          exit 1
       - name: Checkout
         uses: actions/checkout@v2
         with:
