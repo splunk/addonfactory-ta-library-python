@@ -139,6 +139,19 @@ jobs:
         with:
           name: Package
           path: dist/
+  review_secrets:
+    name: security-detect-secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+          fetch-depth: "0"
+      - name: Trufflehog Actions Scan
+        uses: edplato/trufflehog-actions-scan@v0.9j-beta
+        with:
+          scanArguments: "--max_dept 50 -x .github/workflows/exclude-patterns.txt"
   publish:
     needs:
       - pre-commit
@@ -146,6 +159,7 @@ jobs:
       - snyk
       - build
       - compliance-copyrights
+      - review_secrets
     runs-on: ubuntu-latest
     steps:
       - name: exit without publish if PR
