@@ -176,7 +176,7 @@ jobs:
       - name: exit without publish
         if: ${{ steps.check.outputs.run-publish == 'false' || github.event_name == 'pull_request'}}
         run: |
-          echo " some test job failed. "
+          echo " Either some test job failed or event is a Pull Request. "
           exit 1
       - name: Checkout
         uses: actions/checkout@v2
