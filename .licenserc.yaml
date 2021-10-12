@@ -21,7 +21,6 @@ header:
   paths-ignore:
     - ".github/"
     - ".vscode/"
-    - ".reuse/"
     - "dist"
     - "**/*.md"
     - "LICENSE"
