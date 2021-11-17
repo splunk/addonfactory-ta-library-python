@@ -106,13 +106,6 @@ def extract_datainput_name(stanza_name):
     return stanza_name[idx + len(sep) :]
 
 
-def escape_json_control_chars(json_str):
-    control_chars = ((r"\n", "\\\\n"), (r"\r", "\\\\r"), (r"\r\n", "\\\\r\\\\n"))
-    for ch, replace in control_chars:
-        json_str = json_str.replace(ch, replace)
-    return json_str
-
-
 def disable_stdout_buffer():
     os.environ["PYTHONUNBUFFERED"] = "1"
     sys.stdout = os.fdopen(sys.stdout.fileno(), "wb", 0)
