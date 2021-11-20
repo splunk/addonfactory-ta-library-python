@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import warnings
 
 import splunktalib.common.xml_dom_parser as xdp
 import splunktalib.rest as rest
@@ -35,6 +36,14 @@ def _do_rest(uri, session_key):
 
 class ServerInfo:
     def __init__(self, splunkd_uri, session_key):
+        warnings.warn(
+            "splunktalib's ServerInfo is going to be deprecated and removed. "
+            "Please switch to solnlib's "
+            "(https://github.com/splunk/addonfactory-solutions-library-python) "
+            "version of ServerInfo located in server_info.py.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         uri = "{}/services/server/info".format(splunkd_uri)
         server_info = _do_rest(uri, session_key)
         if server_info is None:

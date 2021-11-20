@@ -18,6 +18,7 @@ import os
 import threading
 import time
 import traceback
+import warnings
 
 from splunktalib.common import log
 
@@ -52,6 +53,14 @@ class OrphanProcessChecker:
 
 class OrphanProcessMonitor:
     def __init__(self, callback):
+        warnings.warn(
+            "splunktalib's OrphanProcessMonitor is going to be deprecated and "
+            "removed. Please switch to solnlib's "
+            "(https://github.com/splunk/addonfactory-solutions-library-python) "
+            "version of OrphanProcessMonitor located in orphan_process_monitor.py.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self._checker = OrphanProcessChecker(callback)
         self._thr = threading.Thread(target=self._do_monitor)
         self._thr.daemon = True
