@@ -16,6 +16,7 @@
 
 import os.path as op
 import traceback
+import warnings
 
 from splunktalib.common import log
 
