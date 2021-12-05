@@ -21,6 +21,7 @@ A timer queue implementation
 import queue
 import threading
 import traceback
+import warnings
 from time import time
 
 from splunktalib.common import log
@@ -35,6 +36,12 @@ class TimerQueue:
     import sortedcontainers as sc
 
     def __init__(self):
+        warnings.warn(
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self._timers = TimerQueue.sc.SortedSet()
         self._cancelling_timers = {}
         self._lock = threading.Lock()

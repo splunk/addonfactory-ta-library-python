@@ -24,6 +24,7 @@ import logging
 import logging.handlers as handlers
 import os.path as op
 import time
+import warnings
 
 import splunktalib.common.util as cutil
 from splunktalib.common.pattern import singleton
@@ -36,6 +37,12 @@ def log_enter_exit(logger):
     """
     Log decorator to log function enter and exit
     """
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
 
     def log_decorator(func):
         def wrapper(*args, **kwargs):
@@ -52,6 +59,12 @@ def log_enter_exit(logger):
 @singleton
 class Logs:
     def __init__(self, namespace=None, default_level=logging.INFO):
+        warnings.warn(
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self._loggers = {}
         self._default_level = default_level
         if namespace is None:
@@ -140,6 +153,12 @@ def reset_logger(name):
     """
     Reset global logger.
     """
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
 
     global logger
     logger = Logs().get_logger(name)

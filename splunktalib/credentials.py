@@ -19,6 +19,7 @@ Handles credentials related stuff
 """
 
 import re
+import warnings
 
 import defusedxml.minidom as xdm
 
@@ -43,6 +44,12 @@ class CredNotFound(CredException):
 
 
 def create_credential_manager(username, password, splunkd_uri, app, owner, realm):
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     session_key = CredentialManager.get_session_key(username, password, splunkd_uri)
     return CredentialManager(splunkd_uri, session_key, app, owner, realm)
 
@@ -56,6 +63,12 @@ class CredentialManager:
         """
         :app: when creating/upating/deleting app is required
         """
+        warnings.warn(
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+            DeprecationWarning,
+            stacklevel=2,
+        )
 
         self._app = app
         self._splunkd_uri = splunkd_uri

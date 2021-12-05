@@ -18,6 +18,7 @@ import multiprocessing
 import queue
 import sys
 import threading
+import warnings
 from collections import Iterable
 
 from splunktalib.common import log
@@ -25,6 +26,12 @@ from splunktalib.common import log
 
 class EventWriter:
     def __init__(self, process_safe=False):
+        warnings.warn(
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         if process_safe:
             self._mgr = multiprocessing.Manager()
             self._event_queue = self._mgr.Queue(1000)

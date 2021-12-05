@@ -26,9 +26,16 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import warnings
 
 
 def handle_tear_down_signals(callback):
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     import signal
 
     signal.signal(signal.SIGTERM, callback)
@@ -39,11 +46,23 @@ def handle_tear_down_signals(callback):
 
 
 def datetime_to_seconds(dt):
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     epoch_time = datetime.datetime.utcfromtimestamp(0)
     return (dt - epoch_time).total_seconds()
 
 
 def is_true(val):
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     value = str(val).strip().upper()
     if value in ("1", "TRUE", "T", "Y", "YES"):
         return True
@@ -51,6 +70,12 @@ def is_true(val):
 
 
 def is_false(val):
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     value = str(val).strip().upper()
     if value in ("0", "FALSE", "F", "N", "NO", "NONE", ""):
         return True

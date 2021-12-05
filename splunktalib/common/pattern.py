@@ -20,7 +20,7 @@ Copyright (C) 2005-2019 Splunk Inc. All Rights Reserved.
 Commonly used design partten for python user, includes:
   - singleton (Decorator function used to build singleton)
 """
-
+import warnings
 from functools import wraps
 
 
@@ -28,6 +28,12 @@ def singleton(class_):
     """
     Singleton decoorator function.
     """
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     instances = {}
 
     @wraps(class_)

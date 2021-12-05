@@ -15,6 +15,7 @@
 #
 
 import os
+import warnings
 
 from splunktalib.common import util as scu
 
@@ -23,7 +24,12 @@ def make_splunkhome_path(parts):
     """
     create a path string by the several parts of the path
     """
-
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     relpath = os.path.normpath(os.path.join(*parts))
 
     basepath = os.environ["SPLUNK_HOME"]  # Assume SPLUNK_HOME env has been set
@@ -40,6 +46,12 @@ def make_splunkhome_path(parts):
 
 
 def get_splunk_bin():
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     if os.name == "nt":
         splunk_bin = "splunk.exe"
     else:
