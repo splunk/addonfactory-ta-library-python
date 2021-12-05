@@ -27,10 +27,8 @@ class FileMonitor:
         :files: files to be monidtored with full path
         """
         warnings.warn(
-            "splunktalib's FileMonitor is going to be deprecated and "
-            "removed. Please switch to solnlib's "
-            "(https://github.com/splunk/addonfactory-solutions-library-python) "
-            "version of FileMonitorChecker located in file_monitor.py.",
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
             DeprecationWarning,
             stacklevel=2,
         )

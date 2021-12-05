@@ -15,6 +15,7 @@
 #
 
 import threading
+import warnings
 
 
 class Timer:
@@ -26,6 +27,12 @@ class Timer:
     _lock = threading.Lock()
 
     def __init__(self, callback, when, interval, ident=None):
+        warnings.warn(
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self._callback = callback
         self._when = when
         self._interval = interval

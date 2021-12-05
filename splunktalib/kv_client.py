@@ -16,6 +16,7 @@
 
 import json
 import re
+import warnings
 
 from defusedxml import ElementTree as et
 
@@ -36,6 +37,12 @@ class KVNotExists(KVException):
 
 class KVClient:
     def __init__(self, splunkd_host, session_key):
+        warnings.warn(
+            "This class is deprecated. "
+            "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self._splunkd_host = splunkd_host
         self._session_key = session_key
 
@@ -194,6 +201,12 @@ class KVClient:
 
 
 def create_collection(kv_client, collection, appname):
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     not_exists = False
     try:
         res = kv_client.list_collection(collection, appname)
