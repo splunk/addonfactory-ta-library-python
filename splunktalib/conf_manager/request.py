@@ -49,7 +49,7 @@ def content_request(uri, session_key, method, payload, err_msg):
             err_msg,
             resp.status,
             resp.reason,
-            content.decode("utf-8"),
+            content,
         )
 
         if not (method == "GET" and resp.status == 404):

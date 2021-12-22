@@ -66,7 +66,7 @@ def splunkd_request(
                         msg_temp, splunkd_uri, resp.status, code_to_msg(resp, content)
                     )
             else:
-                return resp, content
+                return resp, content.decode("utf-8")
     else:
         return resp, content
 
