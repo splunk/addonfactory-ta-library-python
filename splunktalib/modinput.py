@@ -64,7 +64,7 @@ def _parse_modinput_configs(root, outer_block, inner_block):
     confs = root.getElementsByTagName(outer_block)
     if not confs:
         log.logger.error("Invalid config, missing %s section", outer_block)
-        raise Exception("Invalid config, missing %s section".format(outer_block))
+        raise Exception("Invalid config, missing {} section".format(outer_block))
 
     configs = []
     stanzas = confs[0].getElementsByTagName(inner_block)
