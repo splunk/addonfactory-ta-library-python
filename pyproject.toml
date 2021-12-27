@@ -25,8 +25,8 @@ repository = "https://github.com/splunk/addonfactory-ta-library-python"
 [tool.poetry.dependencies]
 python = "^3.7"
 sortedcontainers = "^2"
-httplib2 = "^0"
 defusedxml = "^0"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6"
