@@ -189,7 +189,7 @@ class CredentialManager:
         resp = rest.splunkd_request(
             endpoint, self._session_key, method="POST", data=payload
         )
-        if not resp or resp.status_code not in (200, 201, "200", "201"):
+        if not resp or resp.status_code not in (200, 201):
             raise CredException("Failed to encrypt username {}".format(name))
 
     def delete(self, name, throw=False):
@@ -236,10 +236,10 @@ class CredentialManager:
         endpoint = self._get_endpoint(name)
         response = rest.splunkd_request(endpoint, self._session_key, method="DELETE")
 
-        if response is not None and response.status_code in (404, "404"):
+        if response is not None and response.status_code == 404:
             if throw:
                 raise CredNotFound("Credential stanza not exits - {}".format(name))
-        elif not response or response.status_code not in (200, 201, "200", "201"):
+        elif not response or response.status_code not in (200, 201):
             if throw:
                 raise CredException(
                     "Failed to delete credential stanza {}".format(name)
@@ -309,11 +309,7 @@ class CredentialManager:
 
         endpoint = self._get_endpoint()
         response = rest.splunkd_request(endpoint, self._session_key, method="GET")
-        if (
-            response
-            and response.status_code in (200, 201, "200", "201")
-            and response.text
-        ):
+        if response and response.status_code in (200, 201) and response.text:
             return xdp.parse_conf_xml_dom(response.text)
         raise CredException("Failed to get credentials")
 
