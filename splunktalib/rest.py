@@ -17,11 +17,11 @@
 import json
 import urllib.parse
 from traceback import format_exc
+from typing import Optional
 
 import requests
 
 import splunktalib.common.log as log
-import splunktalib.common.util as scu
 
 
 def splunkd_request(
@@ -33,7 +33,7 @@ def splunkd_request(
     timeout=30,
     retry=1,
     verify=False,
-) -> requests.Response:
+) -> Optional[requests.Response]:
 
     headers = headers if headers is not None else {}
     headers["Authorization"] = "Splunk {}".format(session_key)
