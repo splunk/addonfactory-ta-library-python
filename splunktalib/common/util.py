@@ -83,6 +83,12 @@ def is_false(val):
 
 
 def remove_http_proxy_env_vars():
+    warnings.warn(
+        "This function is deprecated. "
+        "Please see https://github.com/splunk/addonfactory-ta-library-python/issues/38",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     for k in ("http_proxy", "https_proxy"):
         if k in os.environ:
             del os.environ[k]
