@@ -59,50 +59,10 @@ jobs:
         uses: returntocorp/semgrep-action@v1
         with:
           publishToken: ${{ secrets.SEMGREP_PUBLISH_TOKEN }}
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs:
-      - fossa-scan
-      - compliance-copyrights
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          # Very Important semantic-release won't trigger a tagged
-          # build if this is not set false
-          persist-credentials: false
-      - name: Setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.7"
-      - name: Install Poetry
-        run: |
-          pipx install poetry==1.4.2
-          poetry build
-      - uses: actions/upload-artifact@v3
-        if: always() 
-        with:
-          name: Package
-          path: dist/
-  review_secrets:
-    name: security-detect-secrets
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: false
-          fetch-depth: "0"
-      - name: Trufflehog Actions Scan
-        uses: edplato/trufflehog-actions-scan@v0.9j-beta
-        with:
-          scanArguments: "--max_dept 50 -x .github/workflows/exclude-patterns.txt"
   publish:
     needs:
       - pre-commit
       - semgrep
-      - build
-      - review_secrets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -119,12 +79,19 @@ jobs:
           pipx install poetry==1.4.2
           poetry install
           poetry build
-      - name: Semantic Release
-        uses: splunk/semantic-release-action@v1.2
+      - id: semantic
+        uses: splunk/semantic-release-action@v1.3
         with:
+          git_committer_name: ${{ secrets.SA_GH_USER_NAME }}
+          git_committer_email: ${{ secrets.SA_GH_USER_EMAIL }}
+          gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
           extra_plugins: |
             @google/semantic-release-replace-plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
-          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      - if: ${{ steps.semantic.outputs.new_release_published == 'true' }}
+        uses: splunk/pypi-publish-action@v1.0
+        with:
+          pypi_username: ${{ secrets.PYPI_USERNAME }}
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
