@@ -77,7 +77,7 @@ jobs:
           python-version: "3.7"
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
+          pipx install poetry==1.4.2
           poetry build
       - uses: actions/upload-artifact@v3
         if: always() 
@@ -116,7 +116,7 @@ jobs:
           python-version: "3.7"
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
+          pipx install poetry==1.4.2
           poetry install
           poetry build
       - name: Semantic Release
