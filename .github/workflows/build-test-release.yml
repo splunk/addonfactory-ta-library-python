@@ -49,16 +49,10 @@ jobs:
           python-version: "3.7"
       - uses: pre-commit/action@v3.0.1
   semgrep:
-    runs-on: ubuntu-latest
-    name: security-sast-semgrep
     if: github.actor != 'dependabot[bot]'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Semgrep
-        id: semgrep
-        uses: returntocorp/semgrep-action@v1
-        with:
-          publishToken: ${{ secrets.SEMGREP_PUBLISH_TOKEN }}
+    uses: splunk/sast-scanning/.github/workflows/sast-scan.yml@main
+    secrets:
+      SEMGREP_KEY: ${{ secrets.SEMGREP_PUBLISH_TOKEN }}
   publish:
     needs:
       - pre-commit
