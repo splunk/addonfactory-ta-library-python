@@ -1,9 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2020 Splunk Inc.
-
-SPDX-License-Identifier: Apache-2.0
--->
-
 # README
 
 Splunk TA Library Python (splunktalib) is an open source helper library used by Splunk Add-ons.
@@ -12,9 +6,9 @@ developers. This SDK/Library extends the Splunk SDK for python.
 
 ## Deprecation
 
-**splunktalib will be deprecated eventually**.
+**splunktalib is deprecated**.
 
-Please use [solnlib](https://github.com/splunk/addonfactory-solutions-library-python) instead. See [this issue](https://github.com/splunk/addonfactory-ta-library-python/issues/38) for more details.
+Please use [solnlib](https://github.com/splunk/addonfactory-solutions-library-python) instead. It should have all the same functionality as this library.
 
 ## Support
 
