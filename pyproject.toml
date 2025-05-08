@@ -23,6 +23,7 @@ license = "Apache-2.0"
 repository = "https://github.com/splunk/addonfactory-ta-library-python"
 
 [tool.poetry.dependencies]
+cron-converter = "1.2.1"
 python = "^3.7"
 sortedcontainers = "^2"
 defusedxml = "^0"

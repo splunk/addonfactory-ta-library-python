@@ -16,6 +16,7 @@
 
 import threading
 import time
+from cron_converter import Cron
 
 
 class Job:
@@ -30,7 +31,7 @@ class Job:
         """
         @job_props: dict like object
         @func: execution function
-        @interval: execution interval
+        @interval: execution interval in seconds or cron schedule string
         @when: seconds from epoch
         @job_id: a unique id for the job
         """
@@ -42,6 +43,11 @@ class Job:
         else:
             self._when = when
         self._interval = interval
+        try:
+            self._cron = Cron(interval)
+            self._cron_schedule = self._cron.schedule(self._when)
+        except:
+            self._cron = None
 
         if job_id is not None:
             self._id = job_id
@@ -68,7 +74,10 @@ class Job:
             self._when = when
 
     def update_expiration(self):
-        self._when += self._interval
+        if self._cron:
+            self._when = self._cron_schedule.next().timestamp()
+        else:
+            self._when += self._interval
 
     def get(self, key, default):
         return self._props.get(key, default)
